@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1098301086246",
+    "firebase_url": "https://elephantory-16fca.firebaseio.com",
+    "project_id": "elephantory-16fca",
+    "storage_bucket": "elephantory-16fca.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098301086246:android:697f9a0ffa35ebbb3264e7",
+        "android_client_info": {
+          "package_name": "skku.edu.elephantory"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098301086246-ku3dffhneooovsb7ec7sk67emgkpd12p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "skku.edu.elephantory",
+            "certificate_hash": "d795685b05233f470e6d686944d52d55d977e2db"
+          }
+        },
+        {
+          "client_id": "1098301086246-cnncvc2iv7rq86lmg4s8jjhu0pv9m1hm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDSnki5p12ZbMGIacTCWP_PEotFPB6W-mA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098301086246-j7ift0ktqlamu3sqmin4s3p9a33enqhn.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
