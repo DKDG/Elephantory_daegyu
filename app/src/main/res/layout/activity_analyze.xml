@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <EditText
+        android:id="@+id/editTextURL"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="text"
+        android:text="http://112.169.177.90:8888" />
+
+    <Button
+        android:id="@+id/buttonRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Connect to Job history server"
+        android:textAllCaps="false" />
+
+    <Button
+        android:id="@+id/buttonDB"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Database"
+        android:textAllCaps="false" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewAnalyze"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="10dp"
+        android:fadeScrollbars="false" />
+
+</LinearLayout>
