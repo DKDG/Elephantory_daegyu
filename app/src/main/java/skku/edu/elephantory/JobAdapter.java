@@ -12,7 +12,7 @@ import java.util.ArrayList;
 
 public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
 
-    ArrayList<Job> items = new ArrayList<Job>();
+        ArrayList<Job> items = new ArrayList<Job>();
 
     @NonNull
     @Override
@@ -43,7 +43,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
         this.items = items;
     }
 
-    static class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         TextView textView2;
         TextView textView3;

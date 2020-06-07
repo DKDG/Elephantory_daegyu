@@ -10,6 +10,7 @@ import android.app.PendingIntent;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -38,6 +39,7 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Analyze extends AppCompatActivity {
@@ -107,7 +109,45 @@ public class Analyze extends AppCompatActivity {
 
         createDatabase(dbName);
 
-    }
+        // delete error
+        MySwipeHelper swipeHelper= new MySwipeHelper(Analyze.this, recyclerView,300) {
+            @Override
+            public void instantiatrMyButton(final RecyclerView.ViewHolder viewHolder, List<MyButton> buffer) {
+                buffer.add(new MyButton(Analyze.this,
+                        "Delete",
+                        30,
+                        R.drawable.ic_delete_black_24dp,
+                        Color.parseColor("#FF3C30"),
+                        new MyButtonClickListener() {
+                            @Override
+                            public void onClick(int pos) {
+                                Toast.makeText(Analyze.this, "Delete click", Toast.LENGTH_SHORT).show();
+                                Log.d("TAG",viewHolder.getAdapterPosition() + "");
+                                jobList.jobResult.jobResultList.remove(viewHolder.getAdapterPosition());                // 해당 항목 삭제
+                                adapter.notifyItemRemoved(viewHolder.getAdapterPosition());    // Adapter에 알려주기.
+                                //viewHolder.itemView.setVisibility(View.GONE);
+
+                            }
+                        }));
+                /*
+                buffer.add(new MyButton(Analyze.this,
+                        "Update",
+                        30,
+                        R.drawable.ic_edit_white_24dp,
+                        Color.parseColor("#03DAC5"),
+                        new MyButtonClickListener() {
+                            @Override
+                            public void onClick(int pos) {
+                                Toast.makeText(Analyze.this, "edit click", Toast.LENGTH_SHORT).show();
+                                //TODO: 편집할 코드
+                            }
+                        }));
+                 */
+            }
+        };// swipeHelper()
+
+    }// onCreate()
+
 
     public void makeRequest() {
         String url = editText.getText().toString();
@@ -201,7 +241,7 @@ public class Analyze extends AppCompatActivity {
                 }, 5000);
                  */
                 try {
-                    Thread.sleep(5000);
+                    Thread.sleep(500);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
