@@ -10,10 +10,9 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder>{
+public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder> {
 
     ArrayList<Job> items = new ArrayList<Job>();
-
 
     @NonNull
     @Override
@@ -44,7 +43,6 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder>{
         this.items = items;
     }
 
-
     static class ViewHolder extends RecyclerView.ViewHolder {
         TextView textView;
         TextView textView2;
@@ -66,6 +64,7 @@ public class JobAdapter extends RecyclerView.Adapter<JobAdapter.ViewHolder>{
             textView3.setText(item.user);
             textView4.setText(item.elapsed_time);
         }
+
     }
 
 }

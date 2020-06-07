@@ -27,8 +27,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         printDebug("///// onCreate(SQLiteDatabase db)");
         db.execSQL("create table if not exists Job(" +
-                " _id integer PRIMARY KEY autoincrement, " +
-                "job_id text, " +
+                "_id integer PRIMARY KEY autoincrement, " +
+                "job_id text UNIQUE, " +
                 "name text, " +
                 "user text, " +
                 "elapsed_time text)");

@@ -1,12 +1,20 @@
 package skku.edu.elephantory;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Notification;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
+import android.os.Build;
 import android.os.Bundle;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -15,6 +23,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.app.NotificationCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -44,6 +54,7 @@ public class Analyze extends AppCompatActivity {
     String tableName;
     SQLiteDatabase db;
 
+    Handler handler = new Handler();
 
 
     @Override
@@ -57,7 +68,17 @@ public class Analyze extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                makeRequest();
+                String title = "Connect to Hadoop history server";
+                String message = "Would you like to get the results?";
+                String titleButtonYes = "Yes";
+                String titleButtonNo = "No";
+
+                AlertDialog dialog = makeRequestDialog(title, message, titleButtonYes, titleButtonNo);
+                dialog.show();
+
+                Toast.makeText(Analyze.this, "Connecting...", Toast.LENGTH_SHORT).show();
+
+
             }
         });
 
@@ -154,12 +175,50 @@ public class Analyze extends AppCompatActivity {
 
         for(int i = 0; i < jobList.jobResult.jobResultList.size(); i++) {
              tmpJob = jobList.jobResult.jobResultList.get(i);
-             sql = String.format("INSERT INTO Job VALUES(NULL, '%s', '%s', '%s', '%s');",
+             sql = String.format("INSERT OR IGNORE INTO Job VALUES(NULL, '%s', '%s', '%s', '%s');",
                     tmpJob.job_id, tmpJob.name, tmpJob.user, tmpJob.elapsed_time);
             db.execSQL(sql);
         }
         Toast.makeText(Analyze.this, "Insert to DB: Success", Toast.LENGTH_SHORT).show();
     }
+
+
+    private AlertDialog makeRequestDialog(CharSequence title, CharSequence message,
+                                          CharSequence titleButtonYes, CharSequence titleButtonNo) {
+        AlertDialog.Builder requestDialog = new AlertDialog.Builder(this);
+        requestDialog.setTitle(title);
+        requestDialog.setMessage(message);
+        requestDialog.setPositiveButton(titleButtonYes, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(Analyze.this, "It will take 5 seconds.", Toast.LENGTH_SHORT).show();
+
+                /*
+                handler.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(Analyze.this, "Request completed.", Toast.LENGTH_SHORT).show();
+                    }
+                }, 5000);
+                 */
+                try {
+                    Thread.sleep(5000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                makeRequest();
+            }
+        });
+
+
+
+        requestDialog.setNegativeButton(titleButtonNo, new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface dialogInterface, int i) {}
+        });
+
+        return requestDialog.create();
+    }
+
 
     public void printDebug(String data) {
         Log.d("Analyze", data);
